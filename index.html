@@ -404,10 +404,10 @@ function renderCats(){
     const b=document.createElement('button');b.className='cat';b.type='button';
     b.innerHTML=`<span class="ic">${c.icon}</span><span><span class="t">${c.t}</span><span class="d">${c.d}</span></span>`;
     b.onclick=()=>{
-      const u=getUsage();
-      if(u && u.date===todayStr() && u.catId!==c.id){showLimitDone();return;}
-      markUsed(c.id);
-      state.catId=c.id;state.qi=0;state.answers={};goQuestion();
+     state.catId=c.id;
+  state.qi=0;
+  state.answers={};
+  goQuestion();
     };
     wrap.appendChild(b);
   });
