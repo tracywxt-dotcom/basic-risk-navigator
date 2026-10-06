@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>跨境风险评估（基础版）｜Tong姐税法财</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231F2A44'/%3E%3Cpath d='M32 12 L46 20 V33 C46 43 40 49 32 52 C24 49 18 43 18 33 V20 Z' fill='none' stroke='%23C9A24B' stroke-width='4'/%3E%3Ccircle cx='32' cy='30' r='3.5' fill='%23C9A24B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://miaoda.feishu.cn">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@500;600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+:root{
+  --navy:#1F2A44; --navy-2:#2A3A5E; --navy-deep:#16233C;
+  --gold:#B98A2F; --gold-2:#C9A24B; --gold-soft:#F3EAD4;
+  --bg:#F3F5F8; --card:#FFFFFF; --ink:#222F40; --muted:#6B7686;
+  --red:#B23A2E; --yellow:#C18F1B; --green:#2F7D55;
+  --red-bg:#FBF0EE; --yellow-bg:#FAF5E6; --green-bg:#EAF4EF;
+  --line:#E4E9F0;
+  --serif:"Noto Serif SC",serif; --sans:"Noto Sans SC",system-ui,-apple-system,"PingFang SC",sans-serif;
+  --shadow:0 10px 30px rgba(31,42,68,.10);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--sans);color:var(--ink);background:var(--bg);line-height:1.6;min-height:100vh}
+button{font-family:var(--sans);cursor:pointer}
+.page{max-width:720px;margin:0 auto;padding:0 20px 72px}
+/* header */
+.brand{display:flex;align-items:center;justify-content:space-between;padding:20px 4px 6px}
+.brand-mark{display:flex;align-items:center;gap:11px}
+.brand-badge{width:34px;height:34px;border-radius:9px;background:var(--navy);display:grid;place-items:center}
+.brand-badge svg{width:20px;height:20px}
+.brand-name{font-family:var(--serif);font-weight:700;font-size:17px;letter-spacing:.02em}
+.brand-name small{display:block;font-family:var(--sans);font-weight:500;font-size:11px;color:var(--gold);letter-spacing:.18em}
+.brand-tag{font-size:12px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:5px 12px;background:#fff}
+/* progress */
+.progress{display:flex;align-items:center;gap:12px;margin:18px 0 4px}
+.progress-track{flex:1;height:4px;border-radius:99px;background:#E2E7EF;overflow:hidden}
+.progress-bar{height:100%;width:0;background:var(--gold);border-radius:99px;transition:width .35s ease}
+.progress-label{font-size:12.5px;color:var(--muted);white-space:nowrap}
+/* views */
+.view{display:none;animation:rise .4s ease}
+.view.active{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+/* welcome */
+.welcome{text-align:center;padding:44px 8px 8px}
+.welcome .eyebrow{font-size:12px;letter-spacing:.28em;color:var(--gold);font-weight:700;margin-bottom:18px}
+.welcome h1{font-family:var(--serif);font-weight:900;font-size:clamp(30px,6vw,44px);line-height:1.28;color:var(--navy-deep)}
+.welcome h1 .accent{color:var(--gold)}
+.welcome .sub{margin-top:16px;color:var(--muted);font-size:15.5px;max-width:540px;margin-left:auto;margin-right:auto}
+.welcome .sub em{font-style:normal;color:var(--navy);font-weight:500}
+.cta{margin-top:30px}
+.btn-primary{background:var(--navy);color:#fff;border:none;border-radius:12px;padding:14px 40px;font-size:16px;font-weight:600;letter-spacing:.05em;transition:background .2s,transform .1s}
+.btn-primary:hover{background:var(--navy-2)}
+.btn-primary:active{transform:translateY(1px)}
+.welcome .fine{margin-top:22px;font-size:13px;color:var(--muted);line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto}
+.honest{margin:24px auto 0;max-width:560px;background:#fff;border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:12px;padding:14px 16px;text-align:left;box-shadow:var(--shadow)}
+.honest p{font-size:14px;line-height:1.75;color:var(--ink)}
+.honest b{color:var(--navy);font-weight:600}
+/* card + question step */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:22px 22px 20px}
+.q-head{font-size:12.5px;color:var(--gold);font-weight:700;letter-spacing:.12em;margin-bottom:8px}
+.q-text{font-size:clamp(17px,3.4vw,20px);font-weight:600;line-height:1.5;margin-bottom:20px;color:var(--navy-deep)}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;background:#fff;text-align:left;font-size:15px;color:var(--ink);font-weight:500;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--gold-2)}
+.opt.on{border-color:var(--navy);background:var(--gold-soft);box-shadow:inset 0 0 0 1px var(--navy)}
+.opt .dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:9px;vertical-align:middle;border:1.5px solid #C7CDD8}
+.opt .hint{display:block;font-size:12.5px;color:var(--muted);font-weight:400;margin-top:3px}
+.q-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:10px;padding:10px 18px;font-size:14px}
+.btn-ghost:hover{border-color:var(--gold-2);color:var(--ink)}
+.btn-next{background:var(--gold);color:#fff;border:none;border-radius:10px;padding:11px 24px;font-size:14.5px;font-weight:600}
+.btn-next:disabled{background:#D8C99A;cursor:not-allowed}
+.text-input{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font-size:16px;font-family:var(--sans);color:var(--ink);background:#fff}
+.text-input:focus{outline:none;border-color:var(--gold)}
+/* category */
+.cats{display:flex;flex-direction:column;gap:12px}
+.cat{border:1.5px solid var(--line);border-radius:14px;padding:16px 18px;background:#fff;text-align:left;display:flex;align-items:center;gap:14px;transition:border-color .15s,background .15s}
+.cat:hover{border-color:var(--gold-2)}
+.cat.on{border-color:var(--navy);background:var(--gold-soft);box-shadow:inset 0 0 0 1px var(--navy)}
+.cat .ic{width:40px;height:40px;flex:none;border-radius:10px;background:var(--navy);color:#fff;display:grid;place-items:center}
+.cat .ic svg{width:21px;height:21px}
+.cat .t{font-size:16px;font-weight:700;color:var(--navy-deep)}
+.cat .d{font-size:13px;color:var(--muted);margin-top:1px}
+/* result */
+.result-hero{background:var(--navy-deep);color:#fff;border-radius:18px;padding:26px 24px;margin-top:18px;position:relative;overflow:hidden}
+.result-hero::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(201,162,75,.25),transparent 65%)}
+.result-hero .eyebrow{font-size:11.5px;letter-spacing:.24em;color:var(--gold-2);font-weight:700}
+.result-hero h1{font-family:var(--serif);font-weight:700;font-size:clamp(24px,5vw,32px);margin-top:8px;line-height:1.25}
+.result-hero .en{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.12em;margin-top:3px}
+.pri{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:12px;padding:16px 18px;margin:18px 0;box-shadow:var(--shadow)}
+.cat-tip{background:#FBF8F1;border:1px solid var(--gold-2);border-radius:12px;padding:13px 16px;margin:16px 0 0;font-size:14px;color:var(--ink);line-height:1.7}
+.pri .k{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.1em;margin-bottom:6px}
+.pri .v{font-size:15px;line-height:1.65}
+.sec-title{font-family:var(--serif);font-weight:700;font-size:18px;color:var(--navy-deep);margin:26px 0 12px;display:flex;align-items:baseline;gap:10px}
+.sec-title .cnt{font-family:var(--sans);font-size:12px;color:var(--muted);font-weight:500}
+.sig-summary{display:flex;gap:12px;justify-content:center;margin:16px 0 4px}
+.ball{flex:1;max-width:160px;text-align:center}
+.ball .circ{width:66px;height:66px;border-radius:50%;margin:0 auto;display:grid;place-items:center;color:#fff;font-size:28px;font-weight:700;font-family:var(--serif);box-shadow:0 6px 16px rgba(0,0,0,.12)}
+.ball.r .circ{background:var(--red)} .ball.y .circ{background:var(--yellow)} .ball.g .circ{background:var(--green)}
+.ball .lab{margin-top:8px;font-size:12.5px;color:var(--muted);line-height:1.35}
+.ball .lab b{display:block;color:var(--ink);font-size:14px}
+.sig{border:1px solid var(--line);border-radius:12px;padding:13px 16px;margin-bottom:9px;background:#fff;display:flex;gap:12px;align-items:flex-start;border-left:5px solid var(--line)}
+.sig.red{background:var(--red-bg);border-left-color:var(--red)}
+.sig.yellow{background:var(--yellow-bg);border-left-color:var(--yellow)}
+.sig.green{background:var(--green-bg);border-left-color:var(--green)}
+.sig .dot{width:20px;height:20px;border-radius:50%;flex:none;margin-top:3px;box-shadow:0 2px 6px rgba(0,0,0,.18)}
+.sig.red .dot{background:var(--red)} .sig.yellow .dot{background:var(--yellow)} .sig.green .dot{background:var(--green)}
+.sig .tag{font-size:11.5px;font-weight:700;letter-spacing:.06em;margin-bottom:2px}
+.sig.red .tag{color:var(--red)} .sig.yellow .tag{color:var(--yellow)} .sig.green .tag{color:var(--green)}
+.sig .txt{font-size:14.5px;color:var(--ink)}
+.actions{display:flex;flex-direction:column;gap:12px;margin-top:24px}
+.action-card{border:1px solid var(--line);border-radius:14px;padding:18px;background:#fff;box-shadow:var(--shadow)}
+.action-card .a{font-size:13px;color:var(--gold);font-weight:700;letter-spacing:.1em;margin-bottom:8px}
+.action-card .qr{display:flex;align-items:center;gap:14px;margin-top:6px}
+.qr-img{width:104px;height:104px;border-radius:10px;border:1px solid var(--line);object-fit:cover;flex:none}
+.action-card p{font-size:14.5px;line-height:1.7}
+.fine-footer{font-size:13px;color:var(--muted);text-align:center;margin-top:26px;line-height:1.8}
+.restart-row{text-align:center;margin-top:20px}
+/* free daily limit modal */
+.modal-mask{position:fixed;inset:0;background:rgba(22,35,60,.55);display:none;align-items:center;justify-content:center;z-index:99;padding:20px}
+.modal{background:#fff;border-radius:18px;max-width:360px;width:100%;padding:26px 24px;text-align:center;box-shadow:var(--shadow);animation:rise .3s ease}
+.modal-eyebrow{font-size:11px;letter-spacing:.22em;color:var(--gold);font-weight:700}
+.modal-title{font-family:var(--serif);font-weight:700;font-size:22px;color:var(--navy-deep);margin:8px 0 10px}
+.modal-desc{font-size:14px;color:var(--muted);line-height:1.7}
+.modal-qr{margin:18px auto 0;display:flex;align-items:center;justify-content:center;gap:14px}
+.modal-qr img{width:96px;height:96px;border-radius:10px;border:1px solid var(--line);object-fit:cover}
+.modal-qr-t{font-size:13px;color:var(--ink);line-height:1.6;text-align:left}
+.modal .btn-primary{margin-top:20px;width:100%}
+@media(max-width:520px){
+  .page{padding:0 16px 56px}
+  .card{padding:18px 16px 16px}
+  .brand-tag{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="brand">
+    <div class="brand-mark">
+      <span class="brand-badge"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2 L20 6.5 V13 C20 18 15.5 21.5 12 22 C8.5 21.5 4 18 4 13 V6.5 Z" stroke="#C9A24B" stroke-width="1.8"/><circle cx="12" cy="11" r="1.6" fill="#C9A24B"/></svg></span>
+      <div class="brand-name">跨境风险评估<small>基础版 · BASIC RISK NAVIGATOR</small></div>
+    </div>
+    <div class="brand-tag">Tong姐税法财</div>
+  </header>
+
+  <!-- ===== 视图：欢迎 ===== -->
+  <section class="view active" id="view-welcome">
+    <div class="welcome">
+      <div class="eyebrow">Tong姐税法财 · 免费自测</div>
+      <h1>跨境事项风险<br><span class="accent">免费自测</span></h1>
+      <p class="sub">我们不替您下结论，只帮您梳理出下一步该核查的方向。几步简单问答，约 1–2 分钟。</p>
+      <div class="cta"><button class="btn-primary" id="btn-start">开始自测</button></div>
+      <div class="honest"><p>本自测工具<b>免费使用</b>。您只需回答几个最核心的简单问题，即可初步评估个人或企业的跨境风险，希望对您有所帮助。如有复杂情况，可在结果页预约进一步咨询。</p></div>
+      <p class="fine">本自测仅作基础风险导引，不构成税务 / 法律意见。建议匿名使用，全程无需填写姓名或联系方式。<br>我们不收集、不上传您的具体答案；仅在本机记录免费自测使用状态。</p>
+    </div>
+  </section>
+
+  <!-- ===== 视图：选择类别 ===== -->
+  <section class="view" id="view-category">
+    <div class="card">
+      <div class="q-head">第 1 步 · 选题</div>
+      <div class="q-text">您最想弄清楚哪一类问题？</div>
+      <div class="cats" id="cat-list"></div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：分支问答 ===== -->
+  <section class="view" id="view-question">
+    <div class="progress">
+      <div class="progress-label" id="prog-label"></div>
+      <div class="progress-track"><div class="progress-bar" id="prog-bar"></div></div>
+    </div>
+    <div class="card">
+      <div class="q-head" id="q-head"></div>
+      <div class="q-text" id="q-text"></div>
+      <div id="q-note" style="display:none;font-size:13px;color:#8a7a4a;background:#FBF8F1;border:1px solid #E8DCC0;border-radius:8px;padding:9px 12px;margin:-8px 0 16px;line-height:1.6"></div>
+      <div id="q-body"></div>
+      <div class="q-nav">
+        <button class="btn-ghost" id="btn-prev">上一步</button>
+        <button class="btn-next" id="btn-next">下一步</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 视图：风险地图结果 ===== -->
+  <section class="view" id="view-result">
+    <div class="result-hero">
+      <div class="eyebrow">YOUR BASIC RISK MAP</div>
+      <h1 id="res-title">您的基础风险地图</h1>
+      <div class="en" id="res-en">Basic Risk Navigator · 基础导引结果</div>
+    </div>
+    <div class="pri"><div class="k">建议优先关注</div><div class="v" id="pri-text"></div></div>
+    <div class="sig-summary" id="sig-summary"></div>
+    <div class="sec-title">风险信号<span class="cnt" id="sig-cnt"></span></div>
+    <div id="sig-list"></div>
+    <div id="cat-tip" class="cat-tip" style="display:none"></div>
+    <div id="fbar-tip" class="cat-tip" style="display:none;border-color:#B23A2E;background:#FBF0EE"></div>
+    <div class="actions">
+      <div class="action-card">
+        <div class="a">下一步建议</div>
+        <p id="next-text"></p>
+      </div>
+      <div class="action-card">
+        <div class="a">如需专业人士进一步判断</div>
+        <div class="qr">
+          <img class="qr-img" src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/CSEAbXOpHos0kMxBGSdcAdbEnbg" alt="Tong姐助理微信二维码">
+          <p>导引只做基础判断。若您的情况涉及具体税务、法律、架构或跨境交易安排，建议由专业人士结合完整资料进一步确认。<br><strong>扫码联系 Tong姐团队，了解进一步核查及咨询安排。</strong></p>
+        </div>
+      </div>
+    </div>
+    <div class="restart-row"><button class="btn-ghost" id="btn-back-edit">返回修改答案</button></div>
+    <p class="fine-footer">本工具仅作基础导引，不构成税务 / 法律意见。 · Tong姐税法财</p>
+  </section>
+
+  <!-- ===== 弹窗：今日免费自测已完成 ===== -->
+  <div class="modal-mask" id="modal-limit">
+    <div class="modal">
+      <div class="modal-eyebrow">FREE DAILY LIMIT</div>
+      <div class="modal-title">今日免费自测已完成</div>
+      <div class="modal-desc">每天可免费自测一个主题。感谢您今天的参与，明日起可再选择一个新主题继续。若今天就需要处理其他跨境事项，可咨询专业人士。</div>
+      <div class="modal-qr">
+        <img src="https://media.doubao.com/space/api/box/stream/download/all_by_mount_point/CSEAbXOpHos0kMxBGSdcAdbEnbg" alt="Tong姐助理微信二维码">
+        <div class="modal-qr-t"><strong>扫码联系 Tong姐团队</strong><br>获取专业咨询</div>
+      </div>
+      <button class="btn-primary" id="btn-modal-close">我知道了</button>
+    </div>
+  </div>
+
+</div>
+<script>
+const CATS=[
+ {id:'hk', t:'香港公司', d:'控制、利润留存、经营管理地有没有问题', icon:'<svg viewBox="0 0 24 24" fill="none"><path d="M4 20h16M6 20V9l6-5 6 5v11M9 13h.01M12 13h.01M15 13h.01M10 20v-3h4v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>'},
+ {id:'crs', t:'身份 / CRS', d:'税务居民、境外账户、境外收入申报', icon:'<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 12h17M12 3.5c2.6 2.2 4 5.2 4 8.5s-1.4 6.3-4 8.5c-2.6-2.2-4-5.2-4-8.5s1.4-6.3 4-8.5Z" stroke="currentColor" stroke-width="1.7"/></svg>'},
+ {id:'trust', t:'离岸信托', d:'21号公告下，哪些历史事项需要重新核查', icon:'<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="1.7"/><path d="M6 13c2 3 10 3 12 0M8 15.5C9.5 18 14.5 18 16 15.5M10 18c1 1.6 3 1.6 4 0" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>'},
+ {id:'us', t:'美国税', d:'准备移民、已有美国身份、准备放弃身份', icon:'<svg viewBox="0 0 24 24" fill="none"><path d="M4 15V8l5 7V8M15 8h5v7h-5zM15 11.5h3.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 20h20" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>'},
+ {id:'family', t:'家族传承', d:'接班、下一代、婚姻、遗嘱、境外身份怎么安排', icon:'<svg viewBox="0 0 24 24" fill="none"><circle cx="9" cy="8" r="3" stroke="currentColor" stroke-width="1.7"/><circle cx="17" cy="9" r="2.4" stroke="currentColor" stroke-width="1.7"/><path d="M3.5 19c0-3 2.5-5 5.5-5s5.5 2 5.5 5M15.5 19c0-2.4 1.7-4.3 4-4.6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>'}
+];
+
+const BRANCHES={
+ hk:{name:'香港公司', qs:[
+  {key:'a1', text:'您是不是中国内地税务居民，并实际控制这家香港公司？', type:'select', opts:[
+    {v:'是', l:null},
+    {v:'不是', l:'g', s:'非内地税务居民控制'},
+    {v:'不确定', l:'y', s:'税务居民身份及控制关系建议先确认'}]},
+  {key:'a2', text:'这家香港公司目前主要做什么？', type:'select', opts:[
+    {v:'有实际经营业务', l:'g', s:'有实际经营业务'},
+    {v:'主要做投资/持股', l:null},
+    {v:'主要用于收款或持有资产', l:null},
+    {v:'几种情况都有', l:null}]},
+  {key:'a3', text:'香港公司的利润通常怎么处理？', type:'select', opts:[
+    {v:'正常分配给股东', l:'g', s:'利润正常分配给股东'},
+    {v:'主要留在公司继续经营或投资', l:null},
+    {v:'长期留在公司，很少分配', l:'y', s:'利润长期留存、较少分配，是值得进一步确认的事项'}]},
+  {key:'a4', text:'如果利润长期留在香港公司，主要是什么原因？', type:'select', opts:[
+    {v:'业务经营、扩张或明确投资需要', l:null},
+    {v:'没有特别原因，一直留在公司', l:'r', s:'利润长期留存，但无明确经营/投资原因'},
+    {v:'主要不想把利润分回个人', l:'r', s:'利润留存原因涉及个人分配安排'},
+    {v:'不适用，没有长期留存利润', l:null}]},
+  {key:'a5', text:'香港公司的主要经营和管理活动通常在哪里发生？', type:'select', opts:[
+    {v:'主要在香港/境外', l:'g', s:'主要经营管理在香港/境外'},
+    {v:'主要在中国内地', l:'y', s:'主要经营管理活动在内地，建议进一步核查相关跨境税务处理'},
+    {v:'两边都有', l:'y', s:'经营管理活动跨两地，建议梳理'}]}
+ ]},
+ crs:{name:'身份 / CRS', qs:[
+  {key:'b1', text:'您目前主要是哪里的税务居民？', type:'select', opts:[
+    {v:'中国内地税务居民', l:null},
+    {v:'香港或其他境外税务居民', l:null},
+    {v:'可能同时涉及两个或以上国家/地区', l:'y', s:'多地税务居民会影响后续判断，建议先确认'},
+    {v:'不确定', l:'y', s:'税务居民身份会影响境外收入及账户信息的后续判断，建议先确认'}]},
+  {key:'b2', text:'您本人是否持有境外银行账户、证券账户或其他境外金融资产？', type:'select', opts:[
+    {v:'有', l:null},
+    {v:'没有', l:'g', s:'无境外金融账户/资产'}]},
+  {key:'b3', text:'这些境外账户、投资或资产，是否产生过股息、利息、投资收益、租金、股权转让收益或其他境外收入？', type:'select', opts:[
+    {v:'有', l:null},
+    {v:'没有', l:'g', s:'境外资产未产生境外收入'}]},
+  {key:'b4', text:'这些境外收入，在中国内地是否按需要做过税务申报？', type:'select', opts:[
+    {v:'已按需要申报', l:'g', s:'境外收入已按需要申报'},
+    {v:'只申报了一部分', l:null},
+    {v:'没有申报', l:null},
+    {v:'报过中国内地税，但不确定这些境外收入是否已经包含在申报中', l:'y', s:'不确定境外收入是否已包含在内地申报中，建议先确认'}]},
+  {key:'b5', text:'家庭成员是否涉及不同国家/地区的身份、税务居民身份或跨境资产持有？', type:'select', opts:[
+    {v:'是，情况比较复杂', l:'y', s:'家庭跨境结构较复杂，建议从家庭整体角度核对申报及信息交换影响'},
+    {v:'是，但已经做过整体梳理', l:'g', s:'家庭跨境情况已整体梳理'},
+    {v:'基本没有', l:'g', s:'家庭无跨境身份/资产交叉'}]}
+ ]},
+ trust:{name:'离岸信托', qs:[
+  {key:'c1', text:'信托设立至今，您是否一直清楚自己各年度的中国税务居民身份？', type:'select', opts:[
+    {v:'一直比较清楚', l:null},
+    {v:'中间取得过外国国籍、绿卡或其他境外长期/永久居留身份', l:'y', s:'取得境外身份不当然代表不再涉及中国税务居民判断'},
+    {v:'长期在境外生活，但不确定中国税务居民身份', l:'y', s:'长期在境外生活仍需按年度判断中国税务居民身份'},
+    {v:'部分年度的中国税务居民身份需要重新确认', l:'y', s:'部分年度的中国税务居民身份建议重新确认'}]},
+  {key:'c2', text:'当年装入信托的主要资产，其取得成本、装入时间和当时价值，现在还能说清楚、找得到资料吗？', type:'select', opts:[
+    {v:'基本能说清楚，主要资料也还在', l:'g', s:'装入资产的取得成本、时间与价值资料较完整'},
+    {v:'大概知道，但部分历史资料已经找不到', l:'y', s:'部分历史资料缺失，建议整理'},
+    {v:'时间比较久，原值或装入时价值已经很难说清', l:'r', s:'装入资产原值/价值资料缺口，需优先核查资料和计税基础'},
+    {v:'曾有代持、重组、平价转让等历史安排', l:'y', s:'存在代持/重组/平价转让等历史安排，建议核查'}]},
+  {key:'c3', text:'信托存续期间，底层资产是否产生过股息、利息、投资收益、股权出售收益或经营收益？', type:'select', opts:[
+    {v:'有', l:'y', s:'存续期间有收益，值得单独核查（并非只有分配才需关注）'},
+    {v:'没有', l:'g', s:'存续期间无收益'},
+    {v:'有过，但历年金额和类型已经不太清楚', l:'r', s:'存续期间有收益但历年金额/类型不清，需优先还原'}]},
+  {key:'c4', text:'这些年，信托或底层公司有没有向您或家人分过钱、转过资产、借过款或代付过较大开支？', type:'select', opts:[
+    {v:'有正式分配', l:'y', s:'存在正式分配，建议结合身份/主体核查'},
+    {v:'有借款、代付款或其他资金往来', l:'y', s:'借款/代付款等往来也可能需重新核查'},
+    {v:'两种情况都有', l:'y', s:'既有分配又有借款/代付往来，建议整体核查'},
+    {v:'没有', l:null}]},
+  {key:'c5', text:'信托设立以后，是否发生过以下重大变化？（可多选）', type:'multi', opts:[
+    {v:'信托已经终止或撤销', l:'y', s:'信托终止不代表历史事项自动结束'},
+    {v:'正准备终止或撤销', l:'y', s:'拟终止，建议提前把装入/收益/终止一起核查'},
+    {v:'本人税务居民身份发生过重大变化', l:'y', s:'身份重大变化需按年度重新确认'},
+    {v:'受益人、控制安排或底层架构发生过重大变化', l:'y', s:'重大结构变化需结合时间重新判断'},
+    {v:'没有明显重大变化', l:null}]}
+ ]},
+ us:{name:'美国税', qs:[
+  {key:'d1', text:'您目前和美国的身份关系更接近哪一种？', type:'select', opts:[
+    {v:'正准备移民美国或申请美国绿卡', l:null},
+    {v:'已经持有美国绿卡或美国国籍', l:null},
+    {v:'没有绿卡/国籍，但长期在美国居住', l:'y', s:'即使没有美国绿卡或国籍，长期在美国居住也可能涉及美国税务居民身份判断'},
+    {v:'正准备放弃美国国籍或长期绿卡', l:null},
+    {v:'以上都不是', l:'g', s:'与美国税务身份无明显关联'}]},
+  {key:'d2', text:'如果您准备成为美国税务居民，进入美国税务体系前，境外资产和持有架构是否做过整体税务梳理？', type:'select', opts:[
+    {v:'做过专业梳理', l:'g', s:'进入美国税务体系前已做专业梳理'},
+    {v:'还没有做过', l:'y', s:'进入前的境外资产/架构建议提前梳理'},
+    {v:'已经进入美国税务体系，当时没有特别梳理', l:'y', s:'进入时未特别梳理，建议回顾确认境外资产/架构影响'},
+    {v:'不适用', l:null}]},
+  {key:'d3', text:'如果您已经属于美国税务居民，境外收入和境外金融资产是否按需要做过美国相关申报？', type:'select', opts:[
+    {v:'已经按需要处理', l:'g', s:'境外收入/资产已按需要申报'},
+    {v:'有境外收入或资产，但只做过部分申报', l:'r', s:'存在境外收入或资产，但相关美国申报可能不完整，建议优先核查历史年度申报'},
+    {v:'有境外收入或资产，但基本没有做过相关申报', l:'r', s:'存在境外收入或资产，但相关美国申报基本未做，建议优先核查历史年度申报'},
+    {v:'报过美国税，但不确定境外收入和资产是否已经完整包含', l:'y', s:'不确定境外收入和资产是否已完整包含在申报中，建议确认'}]},
+  {key:'d_f1', text:'您是否在美国以外持有银行账户、证券账户或其他可能属于 FBAR 申报范围的金融账户，或对这些账户拥有金融权益或签字权？', type:'select', opts:[
+    {v:'是', l:null},
+    {v:'否', l:'g', s:'无美国境外金融账户或相关权益'},
+    {v:'不确定是否属于 FBAR 所说的金融账户、金融权益或签字权范围', l:'y', s:'是否属于 FBAR 账户/权益范围不清楚，建议确认'}]},
+  {key:'d_f2', text:'这些美国境外金融账户，在该年度任何一个时点的最高价值，合计是否曾超过 10,000 美元？', note:'注意：这里看的是所有相关境外金融账户合计，不是单个账户是否超过 10,000 美元。', type:'select', opts:[
+    {v:'是', l:null},
+    {v:'否', l:'g', s:'境外金融账户合计未超过 1 万美元'},
+    {v:'有多个境外账户，但不确定相关年度合计最高余额是否超过 10,000 美元', l:'y', s:'合计最高余额是否过万不确定，建议确认'}]},
+  {key:'d_fbar', text:'如果您属于美国税务申报范围，境外银行、证券等金融账户合计最高余额曾超过 1 万美元，是否按要求单独申报过 FBAR？', type:'select', opts:[
+    {v:'每年都按需要单独申报过 FBAR', l:'g', s:'FBAR 已按需要申报'},
+    {v:'有些年份申报过，有些年份没有', l:'r', s:'FBAR 可能存在历史年度漏报，建议优先核查'},
+    {v:'从来没有单独申报过 FBAR', l:'r', s:'可能存在 FBAR 未申报情况，建议优先核查'},
+    {v:'报过美国税，但不知道是否另外申报过 FBAR', l:'y', s:'FBAR 是否单独申报过不清楚，建议单独确认'}]},
+  {key:'d4', text:'您是否持有或涉及以下境外资产或架构：境外公司、合伙企业、信托，或其他较复杂的境外持有安排？', type:'select', opts:[
+    {v:'有，并已经做过美国税务方面的专业评估', l:'g', s:'复杂境外架构已做美国税务评估'},
+    {v:'有，但没有特别做过美国税务评估', l:'y', s:'境外公司/合伙企业/信托等可能涉及额外美国税务或信息申报要求，建议单独确认'},
+    {v:'没有', l:'g', s:'无复杂境外持有架构'}]},
+  {key:'d5', text:'如果您正在考虑放弃美国国籍或长期绿卡，是否已经做过退出前的美国税务评估？', type:'select', opts:[
+    {v:'已经做过专业评估', l:'g', s:'退出前已做专业评估'},
+    {v:'正准备退出，但还没有做过', l:'y', s:'退出前建议确认退出税、相关申报及历史年度合规'},
+    {v:'已经放弃身份，但当时没有特别做税务评估', l:'y', s:'已退出但当时未做专门评估，建议确认退出年度及此前申报'},
+    {v:'不适用', l:null}]}
+ ]},
+ family:{name:'家族传承', qs:[
+  {key:'e1', text:'如果您有企业或重要股权，未来由谁接班，现在清楚吗？', type:'select', opts:[
+    {v:'已经有比较明确的接班安排', l:'g', s:'接班安排较明确'},
+    {v:'子女可能接，但还没有落实', l:'y', s:'接班有方向但未落实，建议规划'},
+    {v:'子女明确不接，已有其他安排', l:'g', s:'接班已有其他安排'},
+    {v:'目前还没有考虑清楚', l:'y', s:'接班尚未考虑清楚，建议梳理'},
+    {v:'不适用，没有需要接班的企业/股权', l:null}]},
+  {key:'e2', text:'对于下一代未来参与企业、管理家庭资产或承担家族责任，是否已经有比较明确的培养安排？', type:'select', opts:[
+    {v:'已有长期安排，并在逐步实施', l:'g', s:'下一代培养已有安排'},
+    {v:'有想法，但还没有系统规划', l:'y', s:'下一代培养有想法未系统规划'},
+    {v:'目前没有', l:'y', s:'下一代培养尚未启动，建议规划'},
+    {v:'子女不会参与企业或家族资产管理', l:null}]},
+  {key:'e3', text:'如果子女结婚或未来婚姻发生变化，家族股权和重要资产是否考虑过如何保护和安排？', type:'select', opts:[
+    {v:'已经做过相应安排', l:'g', s:'子女婚姻资产安排已做'},
+    {v:'考虑过，但还没有落实', l:'y', s:'子女婚姻资产安排考虑过未落实'},
+    {v:'没有特别考虑过', l:'y', s:'子女婚姻资产安排尚未考虑，建议关注'},
+    {v:'子女目前尚未进入婚姻阶段', l:null}]},
+  {key:'e4', text:'您和配偶是否已经对境内外重要资产做过遗嘱或继承安排？', type:'select', opts:[
+    {v:'已经整体安排过', l:'g', s:'境内外资产已有遗嘱/继承安排'},
+    {v:'只有境内遗嘱，境外资产还没有确认', l:'y', s:'境内有遗嘱，境外资产继承安排待确认'},
+    {v:'有遗嘱，但不确定是否覆盖全部境内外资产', l:'y', s:'遗嘱覆盖范围不确定，建议确认'},
+    {v:'还没有做', l:'y', s:'尚未做遗嘱/继承安排，建议规划'}]},
+  {key:'e5', text:'家庭成员是否有境外身份，或者未来可能长期居住、移民到不同国家/地区？', type:'select', opts:[
+    {v:'有，并已经结合家庭资产做过整体规划', l:'g', s:'境外身份已结合资产整体规划'},
+    {v:'有，但没有系统看过对继承和资产安排的影响', l:'y', s:'境外身份对继承/资产安排的影响未系统评估'},
+    {v:'未来可能发生', l:'y', s:'未来身份/居住地可能变化，建议提前考虑'},
+    {v:'基本没有', l:'g', s:'无境外身份'}]},
+  {key:'e6', text:'如果家庭核心成员突然无法处理事务，境外公司、银行账户、信托及重要资产，其他家人能顺利接手吗？', type:'select', opts:[
+    {v:'已有比较完整的授权和应急安排', l:'g', s:'已有较完整授权与应急安排'},
+    {v:'有部分安排，但还不完整', l:'y', s:'授权与应急安排不完整，建议完善'},
+    {v:'主要由一个人掌握，其他家人很难接手', l:'r', s:'核心资产/账户高度依赖单一成员，突发时可能出现管理与交接中断，建议优先完善应急安排'},
+    {v:'没有考虑过', l:'y', s:'突发应急未考虑，建议规划'}]}
+ ]}
+};
+const $=id=>document.getElementById(id);
+const state={view:'welcome', catId:null, qi:0, answers:{}};
+const views=['view-welcome','view-category','view-question','view-result'];
+function show(v){views.forEach(x=>{$(x).classList.toggle('active',x===v)});state.view=v;window.scrollTo({top:0,behavior:'auto'});}
+const LEVEL={r:['建议进一步核查','red'],y:['建议确认','yellow'],g:['目前未见明显信号','green']};
+
+const FREE_KEY='crs_free_usage';
+function todayStr(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+function getUsage(){try{const raw=localStorage.getItem(FREE_KEY);return raw?JSON.parse(raw):null;}catch(e){return null;}}
+function markUsed(catId){try{localStorage.setItem(FREE_KEY,JSON.stringify({date:todayStr(),catId}));}catch(e){}}
+function showLimitDone(){$('modal-limit').style.display='flex';}
+function goCategory(){renderCats();show('view-category');}
+function renderCats(){
+  const wrap=$('cat-list');wrap.innerHTML='';
+  CATS.forEach(c=>{
+    const b=document.createElement('button');b.className='cat';b.type='button';
+    b.innerHTML=`<span class="ic">${c.icon}</span><span><span class="t">${c.t}</span><span class="d">${c.d}</span></span>`;
+    b.onclick=()=>{
+      const u=getUsage();
+      if(u && u.date===todayStr() && u.catId!==c.id){showLimitDone();return;}
+      markUsed(c.id);
+      state.catId=c.id;state.qi=0;state.answers={};goQuestion();
+    };
+    wrap.appendChild(b);
+  });
+}
+
+function branch(){return BRANCHES[state.catId];}
+// 计算当前应显示的问题序列（美国税按 d1 分支，香港公司按 a3 跳过 a4）
+function flowQs(b){
+  const qs=b.qs;
+  if(state.catId==='hk'){
+    const showA4=state.answers.a3==='长期留在公司，很少分配';
+    return qs.filter(q=>q.key!=='a4'||showA4);
+  }
+  if(state.catId==='crs'){
+    // b3 仅在有境外资产时显示；b4 仅在有境外收入时显示
+    const hasAssets=state.answers.b2==='有';
+    const hasIncome=state.answers.b3==='有';
+    return qs.filter(q=>{
+      if(q.key==='b3')return hasAssets;
+      if(q.key==='b4')return hasAssets&&hasIncome;
+      return true;
+    });
+  }
+  if(state.catId==='us'){
+    const d1=state.answers.d1;
+    if(!d1)return qs.filter(q=>q.key==='d1');
+    const base={
+      '正准备移民美国或申请美国绿卡':['d2','d4'],
+      '已经持有美国绿卡或美国国籍':['d3','d4'],
+      '没有绿卡/国籍，但长期在美国居住':['d3','d4'],
+      '正准备放弃美国国籍或长期绿卡':['d3','d4','d5'],
+      '以上都不是':[],
+      '不确定':['d3','d4']
+    };
+    let keys=[...(base[d1]||[])];
+    // FBAR 三步门槛：仅在已进入/可能进入美国税务体系（含 d3）时出现
+    if(keys.includes('d3')){
+      keys.push('d_f1');
+      if(state.answers.d_f1 && state.answers.d_f1!=='否'){
+        keys.push('d_f2');
+        if(state.answers.d_f2 && state.answers.d_f2!=='否'){
+          keys.push('d_fbar');
+        }
+      }
+    }
+    const order=['d1','d2','d3','d_f1','d_f2','d_fbar','d4','d5'];
+    keys.sort((a,b)=>order.indexOf(a)-order.indexOf(b));
+    const set=new Set(['d1',...keys]);
+    return qs.filter(q=>set.has(q.key));
+  }
+  return qs;
+}
+// 清理已不可见分支的残留答案，避免污染信号计算
+function pruneAnswers(){
+  const vis=flowQs(branch());
+  const visKeys=new Set(vis.map(q=>q.key));
+  Object.keys(state.answers).forEach(k=>{if(!visKeys.has(k))delete state.answers[k];});
+}
+function goQuestion(){renderQuestion();show('view-question');}
+function renderQuestion(){
+  pruneAnswers();
+  const b=branch();
+  let qs=flowQs(b);
+  if(state.qi>=qs.length)state.qi=qs.length-1;
+  if(state.qi<0)state.qi=0;
+  const q=qs[state.qi];
+  $('q-head').textContent=`${b.name} · 第 ${state.qi+1}/${qs.length} 题`;
+  $('q-text').textContent=q.text;
+  const noteEl=$('q-note');
+  if(q.note){noteEl.style.display='block';noteEl.textContent=q.note;}else{noteEl.style.display='none';noteEl.textContent='';}
+  $('prog-label').textContent=`${state.qi+1} / ${qs.length}`;
+  $('prog-bar').style.width=`${(state.qi+1)/qs.length*100}%`;
+  const body=$('q-body');body.innerHTML='';
+  const prevA=state.answers[q.key];
+  if(q.type==='text'){
+    const ta=document.createElement('textarea');ta.className='text-input';ta.rows=2;
+    ta.placeholder=q.ph||'';if(prevA)ta.value=prevA;
+    ta.oninput=()=>state.answers[q.key]=ta.value.trim();
+    body.appendChild(ta);
+    state.answers[q.key]=state.answers[q.key]||'';
+  }else{
+    const multi=q.type==='multi';
+    q.opts.forEach(o=>{
+      const sel=multi?(prevA||[]):(prevA||null);
+      const on=multi?sel.includes(o.v):sel===o.v;
+      const b=document.createElement('button');b.className='opt'+(on?' on':'');b.type='button';
+      b.innerHTML=`<span>${o.v}</span>`;
+      b.onclick=()=>{
+        if(multi){
+          const arr=state.answers[q.key]||[];
+          const ex=q.opts.find(o2=>o2.v==='没有明显重大变化');
+          if(ex){
+            // 互斥：选“没有明显重大变化”时清空其他；选其他时剔除该排他项
+            if(o.v==='没有明显重大变化'){
+              state.answers[q.key]=arr.includes(o.v)?[]:[o.v];
+            }else{
+              const base=arr.filter(x=>x!=='没有明显重大变化');
+              const i=base.indexOf(o.v);
+              if(i>=0)base.splice(i,1);else base.push(o.v);
+              state.answers[q.key]=base;
+            }
+          }else{
+            const i=arr.indexOf(o.v);
+            if(i>=0)arr.splice(i,1);else arr.push(o.v);
+            state.answers[q.key]=arr.slice();
+          }
+        }else{state.answers[q.key]=o.v;}
+        renderQuestion();
+      };
+      body.appendChild(b);
+    });
+  }
+  const last=state.qi===qs.length-1;
+  $('btn-next').textContent=last?'查看我的风险地图':'下一步';
+  $('btn-next').disabled=(q.type!=='text')&&!hasAnswer(q);
+  $('btn-prev').style.visibility=state.qi===0?'hidden':'visible';
+}
+function hasAnswer(q){
+  const a=state.answers[q.key];
+  if(q.type==='multi')return Array.isArray(a)&&a.length>0;
+  return !!a;
+}
+$('btn-prev').onclick=()=>{state.qi--;goQuestion();};
+$('btn-next').onclick=()=>{
+  if(state.qi<flowQs(branch()).length-1){state.qi++;goQuestion();}
+  else showResult();
+};
+$('btn-start').onclick=goCategory;
+$('btn-back-edit').onclick=()=>{state.qi=flowQs(branch()).length-1;goQuestion();};
+$('btn-modal-close').onclick=()=>{$('modal-limit').style.display='none';};
+
+function evalSingle(catId,ans){
+  // 单项提示（不参与最终等级判定）
+  const qs=BRANCHES[catId].qs,s=[];
+  qs.forEach(q=>{
+    const a=ans[q.key];if(!a)return;
+    if(q.type==='multi'){a.slice().forEach(v=>{const o=q.opts.find(x=>x.v===v);if(o&&o.l&&o.s)s.push({l:o.l,txt:o.s});});}
+    else{const o=q.opts.find(x=>x.v===a);if(o&&o.l&&o.s)s.push({l:o.l,txt:o.s});}
+  });
+  return s;
+}
+function evaluateRisk(catId,ans){
+  const sigs=[];let level='green',priorityText='';
+  if(catId==='hk'){
+    const ctrl=ans.a1==='是';
+    const longHold=ans.a3==='长期留在公司，很少分配';
+    const reasonRisk=(ans.a4==='没有特别原因，一直留在公司'||ans.a4==='主要不想把利润分回个人');
+    const passive=(ans.a2==='主要用于收款或持有资产'||ans.a2==='主要做投资/持股');
+    const mgmtInland=ans.a5==='主要在中国内地';
+    if(ctrl&&longHold&&reasonRisk){
+      sigs.push({l:'r',txt:'内地税务居民实际控制香港公司，同时利润长期留存，且留存原因缺乏明确经营/投资需要，建议优先核查相关跨境税务处理。'});
+    }
+    if(ctrl&&mgmtInland&&passive){
+      sigs.push({l:'r',txt:'香港公司由内地税务居民实际控制，主要经营管理活动又集中在内地，同时公司主要承担投资、持股、收款或资产持有功能，建议优先核查实际经营管理及相关跨境税务影响。'});
+    }
+    // 黄色单项
+    if(ctrl) sigs.push({l:'y',txt:'您为中国内地税务居民并实际控制香港公司，需结合利润留存与经营管理地综合判断。'});
+    if(longHold) sigs.push({l:'y',txt:'利润长期留存、较少分配，是跨境税务中值得进一步确认的事项。'});
+    if(mgmtInland) sigs.push({l:'y',txt:'公司主要经营和管理活动在内地，建议进一步核查相关跨境税务处理。'});
+    if(ans.a5==='两边都有') sigs.push({l:'y',txt:'经营管理活动跨两地，建议梳理。'});
+    if(passive) sigs.push({l:'y',txt:'公司主要承担投资、持股、收款或资产持有功能，建议关注实际经营实质。'});
+  }
+  else if(catId==='crs'){
+    const inland=ans.b1==='中国内地税务居民';
+    const idUncertain=(ans.b1==='可能同时涉及两个或以上国家/地区'||ans.b1==='不确定');
+    const hasAssets=ans.b2==='有';
+    const hasIncome=ans.b3==='有';
+    const filed=ans.b4==='已按需要申报';
+    const partial=ans.b4==='只申报了一部分';
+    const none=ans.b4==='没有申报';
+    const underReport=(partial||none);
+    if(inland&&hasIncome&&underReport){
+      sigs.push({l:'r',txt:'您目前属于中国内地税务居民，同时存在境外收入，相关境外收入可能存在未申报或申报不完整的情况，建议优先核查历史年度境外所得及申报情况。'});
+    }else if(idUncertain&&underReport){
+      sigs.push({l:'y',txt:'税务居民身份尚不确定，但存在境外收入申报不完整或未申报情况，建议先确认税务居民身份，再判断相应申报义务。'});
+    }
+    if(idUncertain) sigs.push({l:'y',txt:'税务居民身份涉及多地或尚不确定，会影响境外收入及账户信息的后续判断，建议先确认。'});
+    if(ans.b4==='报过中国内地税，但不确定这些境外收入是否已经包含在申报中') sigs.push({l:'y',txt:'不确定境外收入是否已包含在内地申报中，建议先确认。'});
+    if(ans.b5==='是，情况比较复杂') sigs.push({l:'y',txt:'家庭跨境结构较复杂，建议从家庭整体角度核对申报及信息交换影响。'});
+    if(filed&&hasIncome) sigs.push({l:'g',txt:'境外收入已按需要申报。'});
+  }
+  else if(catId==='trust'){
+    if(ans.c2==='时间比较久，原值或装入时价值已经很难说清')
+      sigs.push({l:'r',txt:'当年装入信托资产的原值、装入时间或价值资料存在明显缺口，建议优先还原历史资料和计税基础。'});
+    if(ans.c3==='有过，但历年金额和类型已经不太清楚')
+      sigs.push({l:'r',txt:'信托存续期间存在历史收益，但历年金额或收益类型已无法清楚还原，建议优先核查历年收益及相关资料。'});
+    const c5arr=Array.isArray(ans.c5)?ans.c5:[];
+    if(ans.c1==='中间取得过外国国籍、绿卡或其他境外长期/永久居留身份'||ans.c1==='长期在境外生活，但不确定中国税务居民身份'||ans.c1==='部分年度的中国税务居民身份需要重新确认'||c5arr.includes('本人税务居民身份发生过重大变化'))
+      sigs.push({l:'y',txt:'信托存续期间涉及税务居民身份变化或身份判断不清，建议先按年度重新确认相关身份。'});
+    if(ans.c2==='大概知道，但部分历史资料已经找不到')
+      sigs.push({l:'y',txt:'装入资产部分历史资料缺失，建议整理。'});
+    if(ans.c2==='曾有代持、重组、平价转让等历史安排')
+      sigs.push({l:'y',txt:'存在代持/重组/平价转让等历史安排，建议核查。'});
+    if(ans.c3==='有')
+      sigs.push({l:'y',txt:'存续期间有收益，值得单独核查（并非只有分配才需关注）。'});
+    if(ans.c4==='有正式分配'||ans.c4==='有借款、代付款或其他资金往来'||ans.c4==='两种情况都有')
+      sigs.push({l:'y',txt:'信托或底层实体与您及家庭成员之间曾发生资金或资产往来，建议结合具体方式、主体和发生时间进一步核查。'});
+    if(c5arr.includes('信托已经终止或撤销')||c5arr.includes('正准备终止或撤销'))
+      sigs.push({l:'y',txt:'信托终止或撤销并不代表历史税务事项自动结束，建议把装入、存续期间收益及终止环节放在一起重新核查。'});
+    if(c5arr.includes('受益人、控制安排或底层架构发生过重大变化'))
+      sigs.push({l:'y',txt:'受益人、控制安排或底层架构发生重大变化，建议结合时间重新判断。'});
+  }
+  else if(catId==='us'){
+    const fbarExposure=ans.d_f1&&ans.d_f1!=='否'&&ans.d_f2&&ans.d_f2!=='否';
+    const fbarMiss=(ans.d_fbar==='有些年份申报过，有些年份没有'||ans.d_fbar==='从来没有单独申报过 FBAR');
+    const isUS=(ans.d1==='已经持有美国绿卡或美国国籍'||ans.d1==='没有绿卡/国籍，但长期在美国居住'||ans.d1==='正准备放弃美国国籍或长期绿卡');
+    if(fbarExposure&&fbarMiss)
+      sigs.push({l:'r',txt:'您的回答显示可能存在 FBAR 历史年度漏报或未申报情况。FBAR 是单独的信息申报义务，不等同于已经完成美国个人所得税申报，建议优先核查相关年度。'});
+    if(isUS&&(ans.d3==='有境外收入或资产，但只做过部分申报'||ans.d3==='有境外收入或资产，但基本没有做过相关申报'))
+      sigs.push({l:'r',txt:'存在境外收入或资产，同时相关美国税务或信息申报可能不完整，建议优先核查历史年度。'});
+    if(ans.d1==='正准备移民美国或申请美国绿卡'&&ans.d2==='还没有做过')
+      sigs.push({l:'y',txt:'您正处于进入美国税务体系前的重要阶段，建议在身份变化前先梳理境外资产、公司、信托及其他持有安排可能受到的美国税务影响。'});
+    if(ans.d1==='正准备放弃美国国籍或长期绿卡'&&ans.d5==='正准备退出，但还没有做过')
+      sigs.push({l:'y',txt:'放弃美国国籍或长期绿卡前，建议先确认是否涉及退出税、相关申报及历史年度税务合规问题。'});
+    if(ans.d5==='已经放弃身份，但当时没有特别做税务评估')
+      sigs.push({l:'y',txt:'您已经完成身份退出，但当时未做专门税务评估，建议确认退出年度及此前相关申报是否已经妥善处理。'});
+    if(ans.d4==='有，但没有特别做过美国税务评估')
+      sigs.push({l:'y',txt:'您涉及境外公司、合伙企业、信托或其他较复杂持有安排，建议单独确认美国税务及信息申报影响。'});
+    if(ans.d_f1&&ans.d_f1.indexOf('不确定是否属于')===0||ans.d_f2&&ans.d_f2.indexOf('有多个境外账户，但不确定')===0||ans.d_fbar==='报过美国税，但不知道是否另外申报过 FBAR')
+      sigs.push({l:'y',txt:'FBAR 申报情况不清楚，建议单独确认。'});
+  }
+  else if(catId==='family'){
+    if(ans.e6==='主要由一个人掌握，其他家人很难接手')
+      sigs.push({l:'r',txt:'家庭核心资产、账户或企业管理高度依赖单一成员，如果发生突发情况，可能出现实际管理和交接中断，建议优先完善授权和应急安排。'});
+    if(ans.e1==='子女可能接，但还没有落实'||ans.e1==='目前还没有考虑清楚')
+      sigs.push({l:'y',txt:'接班有方向但未落实或尚未考虑清楚，建议规划。'});
+    if(ans.e2==='有想法，但还没有系统规划'||ans.e2==='目前没有')
+      sigs.push({l:'y',txt:'下一代培养有想法未系统规划或尚未启动，建议规划。'});
+    if(ans.e3==='考虑过，但还没有落实'||ans.e3==='没有特别考虑过')
+      sigs.push({l:'y',txt:'子女婚姻对股权和重要资产的影响考虑过未落实或尚未考虑，建议关注。'});
+    if(ans.e4==='只有境内遗嘱，境外资产还没有确认'||ans.e4==='有遗嘱，但不确定是否覆盖全部境内外资产'||ans.e4==='还没有做')
+      sigs.push({l:'y',txt:'境内外资产的遗嘱或继承安排不完整或待确认，建议梳理。'});
+    if(ans.e5==='有，但没有系统看过对继承和资产安排的影响'||ans.e5==='未来可能发生')
+      sigs.push({l:'y',txt:'家庭成员境外身份或居住地变化对继承/资产安排的影响未系统评估，建议关注。'});
+    if(ans.e6==='有部分安排，但还不完整'||ans.e6==='没有考虑过')
+      sigs.push({l:'y',txt:'突发应急授权与交接安排不完整或未考虑，建议完善。'});
+  }
+  // 排序
+  const order={r:0,y:1,g:2};
+  sigs.sort((a,b)=>order[a.l]-order[b.l]);
+  if(sigs.some(x=>x.l==='r'))level='red';
+  else if(sigs.some(x=>x.l==='y'))level='yellow';
+  else level='green';
+  const PRI={
+    red: catId==='family'?'优先关注 · ':
+         catId==='trust'?'优先核查 · ':
+         '优先核查 · ',
+    yellow:'建议确认 · ',
+    green:''
+  };
+  if(level==='red'){
+    const first=sigs.find(x=>x.l==='r');
+    priorityText=first.txt;
+  }else if(level==='yellow'){
+    const yc=sigs.filter(x=>x.l==='y').length;
+    priorityText = catId==='trust'&&yc>=2
+      ? '建议系统核查 · 信托历史中同时涉及多项需要重新确认的事项，建议按设立/装入、存续期间收益和资金往来、身份变化及终止等时间顺序整体核查。'
+      : '建议确认 · 有部分事项值得进一步确认或完善。';
+  }else{
+    priorityText='根据本次回答，暂未发现需要优先核查的明显信号。';
+  }
+  return {level,priorityText,sigs};
+}
+
+function showResult(){
+  const b=branch();
+  $('res-en').textContent=`Basic Risk Navigator · ${b.name}`;
+  const er=evaluateRisk(state.catId,state.answers);
+  $('pri-text').textContent=er.priorityText;
+  const s=er.sigs;
+  $('res-title').textContent = er.level==='red' ? '建议优先核查。' : (er.level==='yellow' ? '建议先确认以下几个事项。' : '根据本次回答，暂未发现需要优先核查的明显信号。');
+  $('sig-cnt').textContent=`共 ${s.length} 条`;
+  const rc=s.filter(x=>x.l==='r').length, yc=s.filter(x=>x.l==='y').length, gc=s.filter(x=>x.l==='g').length;
+  $('sig-summary').innerHTML=
+    `<div class="ball r"><div class="circ">${rc}</div><div class="lab"><b>${rc} 项</b>建议进一步核查</div></div>`+
+    `<div class="ball y"><div class="circ">${yc}</div><div class="lab"><b>${yc} 项</b>建议确认</div></div>`+
+    `<div class="ball g"><div class="circ">${gc}</div><div class="lab"><b>${gc} 项</b>未见明显信号</div></div>`;
+  const list=$('sig-list');list.innerHTML='';
+  if(s.length===0){
+    list.innerHTML='<div class="sig" style="background:#EAF4EF;border-left-color:#2F7D55"><span class="dot" style="background:#2F7D55"></span><div><div class="tag" style="color:#2F7D55">目前未见明显信号</div><div class="txt">根据本次回答，暂未发现需要优先核查的明显信号。</div></div></div>';
+  }else{
+    const C={r:['#B23A2E','#FBF0EE'],y:['#C18F1B','#FAF5E6'],g:['#2F7D55','#EAF4EF']};
+    s.forEach(x=>{
+      const [col,bg]=C[x.l];
+      const el=document.createElement('div');el.className='sig';
+      el.style.background=bg;el.style.borderLeftColor=col;
+      el.innerHTML=`<span class="dot" style="background:${col}"></span><div><div class="tag" style="color:${col}">${LEVEL[x.l][0]}</div><div class="txt">${x.txt}</div></div>`;
+      list.appendChild(el);
+    });
+  }
+  let next='建议您保存这份导引结果。导引只做基础判断，若您的情况涉及具体税务、法律、架构或跨境交易安排，建议由专业人士结合完整资料进一步确认。';
+  if(state.catId==='us')
+    next='美国跨境申报不只涉及个人所得税。FBAR 是单独的信息申报义务，不能因为已经申报美国个人所得税，就判断 FBAR 也已经完成。境外账户是否产生应税收入，也不能单独决定是否需要申报 FBAR。具体仍需结合身份、账户类型、账户余额及相关年度判断。' + next;
+  const tip=$('cat-tip');
+  if(state.catId==='trust'){tip.style.display='block';tip.textContent='21号公告下，看一个离岸信托不能只看今天的状态。通常需要把税务居民身份、历次资产装入、存续期间收益、与家庭成员的资金往来，以及终止或重大变化按时间重新串起来看。过去曾做过专业咨询或税务安排，也不代表今天无需重新核查；关键是历史事实和资料能否按照现行规则重新解释并相互对应。';}
+  else if(state.catId==='us'){tip.style.display='block';tip.textContent='美国跨境税务往往要结合身份变化的时间点来看：进入美国税务体系前的资产安排、成为美国税务居民后的全球收入及境外资产申报，以及退出美国税务体系时的税务处理，是三个不同阶段的问题。';}
+  else{tip.style.display='none';tip.textContent='';}
+  const fbarTip=$('fbar-tip');
+  if(state.catId==='us' && state.answers.d_f1 && state.answers.d_f1!=='否' && state.answers.d_f2 && state.answers.d_f2!=='否'){
+    fbarTip.style.display='block';
+    fbarTip.innerHTML='<div style="font-weight:700;color:#B23A2E;margin-bottom:6px">FBAR 申报义务提示</div>你可能涉及 FBAR 申报义务。如果你属于 FBAR 申报范围，并且美国境外相关金融账户在一年中任何时点的合计价值超过 10,000 美元，通常需要进一步核查是否需要提交 FBAR。这里的 10,000 美元门槛看的是所有相关境外金融账户合计，不是单个账户。FBAR 的法定申报截止日通常为 4 月 15 日；未在 4 月 15 日前提交的，通常自动延期至 10 月 15 日，无需单独申请延期。FBAR 与个人所得税申报并不是同一项申报，很多跨境人士容易遗漏。建议：如果你以前年度也存在类似情况，但不确定是否已经正确申报 FBAR，建议进一步核查历史年度申报情况。';
+  }else{
+    fbarTip.style.display='none';fbarTip.textContent='';
+  }
+  $('next-text').textContent=next;
+  markUsed(state.catId);
+  show('view-result');
+}
+</script>
+</body>
+</html>
